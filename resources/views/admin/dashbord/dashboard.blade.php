@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('title', 'لوحة التحكم')
 @section('header', 'لوحة التحكم')

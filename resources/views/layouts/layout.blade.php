@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,11 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Icons -->
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         * {
@@ -269,21 +270,34 @@
         <div class="menu-title">القائمة الرئيسية</div>
 
         <a href="{{ url('/dashboard') }}"
-           class="{{ request()->is('dashboard') ? 'active' : '' }}">
+            class="{{ request()->is('dashboard') ? 'active' : '' }}">
             <i class="bi bi-grid"></i>
             لوحة التحكم
         </a>
 
         <a href="{{ url('/families') }}"
-           class="{{ request()->is('families*') ? 'active' : '' }}">
+            class="{{ request()->is('families*') ? 'active' : '' }}">
             <i class="bi bi-people"></i>
             الأسر المسجلة
         </a>
 
-        <a href="{{ url('/residents') }}"
-           class="{{ request()->is('residents*') ? 'active' : '' }}">
+        <a href="{{ url('/individuals') }}"
+            class="{{ request()->is('individuals*') ? 'active' : '' }}">
             <i class="bi bi-person-vcard"></i>
             الأفراد
+        </a>
+
+        
+        <a href="{{ url('/needs') }}"
+            class="{{ request()->is('needs*') ? 'active' : '' }}">
+            <i class="bi bi-clipboard-check"></i>
+            <span>متابعة الاحتياجات</span>
+        </a>
+
+        <a href="{{ url('/activity') }}"
+            class="{{ request()->is('activity*') ? 'active' : '' }}">
+            <i class="bi bi-clock-history"></i>
+           <span>سجل النشاط</span>
         </a>
 
         <div class="menu-title">إدارة المركز</div>
@@ -323,8 +337,8 @@
         <header class="topbar">
             <div class="d-flex align-items-center gap-3">
                 <button class="menu-toggle"
-                        onclick="toggleSidebar()"
-                        aria-label="فتح القائمة">
+                    onclick="toggleSidebar()"
+                    aria-label="فتح القائمة">
                     <i class="bi bi-list"></i>
                 </button>
 
@@ -355,8 +369,9 @@
             document.getElementById('overlay').classList.toggle('show');
         }
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
 
 </body>
+
 </html>

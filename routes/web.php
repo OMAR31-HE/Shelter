@@ -17,5 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashbord.dashboard');
+});
+
+Route::get('/families', function () {
+    return view('admin.families.families');
+});
+Route::get('/individuals', function () {
+    return view('admin.families.individuals');
+});
+Route::get('/needs', function () {
+    return view('admin.needs.needs');
+});
+Route::get('/activity', function () {
+    return view('admin.activity.activity');
 });
