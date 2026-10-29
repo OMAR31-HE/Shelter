@@ -5,9 +5,16 @@
 
 @section('content')
 
-<div class="page-heading">
-    <h4>متابعة احتياجات الأسر</h4>
-    <p>متابعة طلبات واحتياجات الأسر داخل المركز</p>
+<div class="page-heading d-flex justify-content-between align-items-start flex-wrap gap-2">
+    <div>
+        <h4>متابعة احتياجات الأسر</h4>
+        <p>متابعة طلبات واحتياجات الأسر داخل المركز</p>
+    </div>
+
+    <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#addNeedModal">
+        <i class="bi bi-plus-lg"></i>
+        تسجيل احتياج جديد
+    </button>
 </div>
 
 
@@ -16,28 +23,28 @@
     <div class="col-12 col-sm-6 col-xl-3">
         <div class="panel">
             <p>إجمالي الاحتياجات</p>
-            <h3 id="totalNeeds">4</h3>
+            <h3 id="totalNeeds">{{ count($needs) }}</h3>
         </div>
     </div>
 
     <div class="col-12 col-sm-6 col-xl-3">
         <div class="panel">
             <p>احتياجات عاجلة</p>
-            <h3 id="urgentNeeds">2</h3>
+            <h3 id="urgentNeeds">{{ count(array_filter($needs, fn($n) => $n['priority'] === 'عاجلة')) }}</h3>
         </div>
     </div>
 
     <div class="col-12 col-sm-6 col-xl-3">
         <div class="panel">
             <p>قيد المعالجة</p>
-            <h3 id="processingNeeds">1</h3>
+            <h3 id="processingNeeds">{{ count(array_filter($needs, fn($n) => $n['status'] === 'قيد المعالجة')) }}</h3>
         </div>
     </div>
 
     <div class="col-12 col-sm-6 col-xl-3">
         <div class="panel">
             <p>تمت تلبيتها</p>
-            <h3 id="completedNeeds">1</h3>
+            <h3 id="completedNeeds">{{ count(array_filter($needs, fn($n) => $n['status'] === 'مكتمل')) }}</h3>
         </div>
     </div>
 
@@ -93,103 +100,51 @@
 
             <tbody>
 
-                <tr>
-                    <td>301</td>
-                    <td>أسرة أحمد</td>
-                    <td>مواد غذائية</td>
-                    <td>
-                        <span class="badge bg-danger">عاجلة</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-secondary">جديد</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-                    </td>
-                </tr>
+                @php
+                    $priorityBadge = [
+                        'عاجلة' => 'bg-danger',
+                        'متوسطة' => 'bg-warning text-dark',
+                        'عادية' => 'bg-success',
+                    ];
 
-                <tr>
-                    <td>302</td>
-                    <td>أسرة محمد</td>
-                    <td>بطانيات</td>
-                    <td>
-                        <span class="badge bg-warning text-dark">متوسطة</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-primary">قيد المعالجة</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-                    </td>
-                </tr>
+                    $statusBadge = [
+                        'جديد' => 'bg-secondary',
+                        'قيد المعالجة' => 'bg-primary',
+                        'مكتمل' => 'bg-success',
+                    ];
+                @endphp
 
-                <tr>
-                    <td>303</td>
-                    <td>أسرة علي</td>
-                    <td>مواد نظافة</td>
-                    <td>
-                        <span class="badge bg-success">عادية</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-success">مكتمل</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>304</td>
-                    <td>أسرة خالد</td>
-                    <td>مياه شرب</td>
-                    <td>
-                        <span class="badge bg-danger">عاجلة</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-secondary">جديد</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-
-                    </td>
-
-
-                </tr>
+                @foreach ($needs as $need)
+                    <tr>
+                        <td>{{ $need['id'] }}</td>
+                        <td>{{ $need['family'] }}</td>
+                        <td>{{ $need['type'] }}</td>
+                        <td>
+                            <span class="badge {{ $priorityBadge[$need['priority']] ?? 'bg-secondary' }}">
+                                {{ $need['priority'] }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge {{ $statusBadge[$need['status']] ?? 'bg-secondary' }}">
+                                {{ $need['status'] }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary"
+                                onclick="changeNeedStatus(this)">
+                                تغيير الحالة
+                            </button>
+                            <button class="btn btn-sm btn-outline-dark mt-1"
+                                onclick="showNeedHistory(this)">
+                                <i class="bi bi-clock-history"></i>
+                                سجل الطلب
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
 
                 <tr id="noNeedsResults" style="display: none;">
-                    <td colspan="5" class="text-center text-muted">
+                    <td colspan="6" class="text-center text-muted">
                         لا توجد نتائج مطابقة
                     </td>
                 </tr>
@@ -229,9 +184,71 @@
     </div>
 </div>
 
+<div class="modal fade" id="addNeedModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" method="POST" action="{{ url('/needs') }}">
+            @csrf
+
+            <div class="modal-header">
+                <h5 class="modal-title">تسجيل احتياج جديد</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">الأسرة</label>
+                    <select name="family" class="form-select" required>
+                        @foreach ($families as $familyName)
+                            <option value="{{ $familyName }}">{{ $familyName }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">نوع الاحتياج</label>
+                    <input type="text" name="type" class="form-control" placeholder="مثال: مواد غذائية" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">الأولوية</label>
+                    <select name="priority" class="form-select">
+                        <option value="عاجلة">عاجلة</option>
+                        <option value="متوسطة">متوسطة</option>
+                        <option value="عادية">عادية</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="submit" class="btn btn-primary">حفظ الاحتياج</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
 @push('styles')
 <style>
+    .add-btn {
+        background-color: #159a91;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .add-btn:hover {
+        background-color: #117c75;
+    }
+
+    .add-btn i {
+        margin-left: 5px;
+    }
+
 @media (max-width: 480px) {
     .main-content {
         padding: 8px;
