@@ -6,9 +6,16 @@
 
 @section('content')
 
-<div class="page-heading">
-    <h4>الأسر المسجلة</h4>
-    <p>عرض وإدارة بيانات الأسر في المركز</p>
+<div class="page-heading d-flex justify-content-between align-items-start flex-wrap gap-2">
+    <div>
+        <h4>الأسر المسجلة</h4>
+        <p>عرض وإدارة بيانات الأسر في المركز</p>
+    </div>
+
+    <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#addFamilyModal">
+        <i class="bi bi-plus-lg"></i>
+        إضافة أسرة جديدة
+    </button>
 </div>
 
 <div class="panel">
@@ -37,48 +44,31 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td>101</td>
-                    <td>أسرة أحمد</td>
-                    <td>5</td>
-                    <td>مقيمة</td>
-                    <td>
-                        <button type="button"
-                            class="details-btn"
-                            data-family-id="101"
-                            data-family-name="أسرة أحمد"
-                            data-family-count="5"
-                            data-bs-toggle="modal"
-                            data-bs-target="#familyDetails">
-                            <i class="bi bi-eye"></i>
-                            عرض التفاصيل
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>102</td>
-                    <td>أسرة محمد</td>
-                    <td>4</td>
-                    <td>مقيمة</td>
-                    <td>
-                        <button type="button"
-                            class="details-btn"
-                            data-family-id="102"
-                            data-family-name="أسرة محمد"
-                            data-family-count="4"
-                            data-bs-toggle="modal"
-                            data-bs-target="#familyDetails">
-                            <i class="bi bi-eye"></i>
-                            عرض التفاصيل
-                        </button>
-                    </td>
-
-                </tr>
+                @foreach ($families as $family)
+                    <tr>
+                        <td>{{ $family['id'] }}</td>
+                        <td>{{ $family['name'] }}</td>
+                        <td>{{ $family['members_count'] }}</td>
+                        <td>{{ $family['status'] }}</td>
+                        <td>
+                            <button type="button"
+                                class="details-btn"
+                                data-family-id="{{ $family['id'] }}"
+                                data-family-name="{{ $family['name'] }}"
+                                data-family-count="{{ $family['members_count'] }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#familyDetails">
+                                <i class="bi bi-eye"></i>
+                                عرض التفاصيل
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 </div>
+
 <div class="modal fade" id="familyDetails" tabindex="-1"
     aria-labelledby="familyDetailsLabel" aria-hidden="true">
 
@@ -113,10 +103,57 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="addFamilyModal" tabindex="-1"
+    aria-labelledby="addFamilyModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <form class="modal-content" method="POST" action="{{ url('/families') }}">
+            @csrf
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="addFamilyModalLabel">
+                    تسجيل أسرة جديدة
+                </h5>
+
+                <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="إغلاق"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">اسم الأسرة</label>
+                    <input type="text" name="name" class="form-control" placeholder="مثال: أسرة سالم" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">عدد الأفراد</label>
+                    <input type="number" name="members_count" class="form-control" min="1" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">الحالة</label>
+                    <select name="status" class="form-select">
+                        <option value="مقيمة">مقيمة</option>
+                        <option value="غادرت">غادرت</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="submit" class="btn btn-primary">حفظ الأسرة</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
 @push('styles')
 <style>
-    .details-btn {
+    .details-btn,
+    .add-btn {
         background-color: #159a91;
         color: white;
         border: none;
@@ -127,11 +164,13 @@
         transition: 0.3s;
     }
 
-    .details-btn:hover {
+    .details-btn:hover,
+    .add-btn:hover {
         background-color: #117c75;
     }
 
-    .details-btn i {
+    .details-btn i,
+    .add-btn i {
         margin-left: 5px;
     }
 </style>

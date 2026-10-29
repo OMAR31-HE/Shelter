@@ -95,6 +95,30 @@
             color: white;
         }
 
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            background: none;
+            border: 0;
+            color: #d5deeb;
+            padding: 13px 14px;
+            margin-bottom: 5px;
+            border-radius: 9px;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .logout-btn:hover {
+            background: #d9534f;
+            color: white;
+        }
+
+        .logout-btn i {
+            font-size: 18px;
+        }
+
         .main {
             margin-right: 250px;
             min-height: 100vh;
@@ -302,32 +326,45 @@
 
         <div class="menu-title">إدارة المركز</div>
 
-        <a href="{{ url('/arrivals') }}">
+        <a href="{{ url('/arrivals') }}"
+            class="{{ request()->is('arrivals*') ? 'active' : '' }}">
             <i class="bi bi-box-arrow-in-left"></i>
             الوصول والمغادرة
         </a>
 
-        <a href="{{ url('/needs') }}">
-            <i class="bi bi-box-seam"></i>
-            الاحتياجات
-        </a>
-
-        <a href="{{ url('/facilities') }}">
+        <a href="{{ url('/facilities') }}"
+            class="{{ request()->is('facilities*') ? 'active' : '' }}">
             <i class="bi bi-building"></i>
             مرافق المركز
         </a>
 
-        <a href="{{ url('/reports') }}">
+        <a href="{{ url('/permissions') }}"
+            class="{{ request()->is('permissions*') ? 'active' : '' }}">
+            <i class="bi bi-shield-lock"></i>
+            المستخدمون والصلاحيات
+        </a>
+
+        <a href="{{ url('/reports') }}"
+            class="{{ request()->is('reports*') ? 'active' : '' }}">
             <i class="bi bi-bar-chart"></i>
             التقارير
         </a>
 
         <div class="menu-title">الحساب</div>
 
-        <a href="{{ url('/profile') }}">
+        <a href="{{ url('/profile') }}"
+            class="{{ request()->is('profile*') ? 'active' : '' }}">
             <i class="bi bi-person-circle"></i>
             الملف الشخصي
         </a>
+
+        <form method="POST" action="{{ url('/logout') }}" class="logout-form">
+            @csrf
+            <button type="submit" class="logout-btn">
+                <i class="bi bi-box-arrow-right"></i>
+                تسجيل الخروج
+            </button>
+        </form>
 
     </aside>
 
