@@ -1,254 +1,194 @@
 @extends('layouts.layout')
 
 @section('title', 'الأنشطة')
-@section('header', 'أخر الأنشطة')
+@section('header', 'سجل الأنشطة')
 
 @section('content')
-<div class="page-heading">
-    <h4>الأنشطة</h4>
-    <p>أخر الأنشطة في المركز</p>
-</div>
 
-<div class="row g-3 mb-4">
-    <div class="col-12 col-sm-6 col-xl-3">
-        <div class="panel">
-            <h3 id="totalNeeds">اليوم</h3>
-            <p>أحدث نشاط</p>
-
-        </div>
-    </div>
-     <div class="col-12 col-sm-6 col-xl-3">
-        <div class="panel">
-            <h3 id="totalNeeds">28</h3>
-            <p>إجمالي العمليات</p>
-
-        </div>
-    </div>
-    <div class="col-12 col-sm-6 col-xl-3">
-        <div class="panel">
-            <h3 id="totalNeeds">11</h3>
-            <p>إجمالي المستخدمين</p>
-
-        </div>
-    </div>
-</div>
-<div class="panel">
-
-    <h5 class="mb-3">قائمة الأنشطة</h5>
-
-    <div class="row g-2 mb-3">
-
-        <div class="col-12 col-md-6">
-            <input type="text"
-                id="needSearch"
-                class="form-control"
-                placeholder="ابحث باسم النشاط ...">
-        </div>
-
-        <div class="col-12 col-md-3">
-            <select id="priorityFilter" class="form-select">
-                <option value="">كل الأنشطة</option>
-                <option value="إضافة أسرة">إضافة أسرة</option>
-                <option value="إضافة فرد">إضافة فرد</option>
-                <option value="إضافة احتياج">إضافة احتياج</option>
-                <option value="تعديل بيانات">تعديل بيانات</option>
-                <option value="تغيير حالة احتياج">تغيير حالة احتياج</option>
-                <option value="حذف احتياج">حذف احتياج</option>
-
-            </select>
-        </div>
-
-        <!-- <div class="col-12 col-md-3">
-
-            <input type="date">
-        </div> -->
-        <div class="input-group">
-        <input type="text"
-               id="activityDate"
-               class="form-control"
-               placeholder="اختر الفترة الزمنية"
-               onfocus="this.type='date'"
-               onblur="if(!this.value)this.type='text'">
-        <!-- <span class="input-group-text">
-            <i class="bi bi-calendar3"></i>
-        </span> -->
-
-    </div>
-
-
-
-    <!-- <div class="table-responsive">
-
-    <div class="table-responsive">
-        <table class="table table-hover" id="needsTable">
-
-            <thead>
-                <tr>
-                    <th>رقم الطلب</th>
-                    <th>اسم الأسرة</th>
-                    <th>نوع الاحتياج</th>
-                    <th>الأولوية</th>
-                    <th>الحالة</th>
-                    <th>الإجراءات</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td>301</td>
-                    <td>أسرة أحمد</td>
-                    <td>مواد غذائية</td>
-                    <td>
-                        <span class="badge bg-danger">عاجلة</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-secondary">جديد</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>302</td>
-                    <td>أسرة محمد</td>
-                    <td>بطانيات</td>
-                    <td>
-                        <span class="badge bg-warning text-dark">متوسطة</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-primary">قيد المعالجة</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>303</td>
-                    <td>أسرة علي</td>
-                    <td>مواد نظافة</td>
-                    <td>
-                        <span class="badge bg-success">عادية</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-success">مكتمل</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>304</td>
-                    <td>أسرة خالد</td>
-                    <td>مياه شرب</td>
-                    <td>
-                        <span class="badge bg-danger">عاجلة</span>
-                    </td>
-                    <td>
-                        <span class="badge bg-secondary">جديد</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary"
-                            onclick="changeNeedStatus(this)">
-                            تغيير الحالة
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark mt-1"
-                            onclick="showNeedHistory(this)">
-                            <i class="bi bi-clock-history"></i>
-                            سجل الطلب
-                        </button>
-
-                    </td>
-
-
-                </tr>
-
-                <tr id="noNeedsResults" style="display: none;">
-                    <td colspan="5" class="text-center text-muted">
-                        لا توجد نتائج مطابقة
-                    </td>
-                </tr>
-
-            </tbody>
-
-        </table>
-    </div>
-
-</div>
- -->
-
-<div class="modal fade" id="needHistoryModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title">سجل تتبّع الاحتياج</h5>
-                <button type="button" class="btn-close"
-                        data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-                <h6 id="historyNeedName"></h6>
-
-                <ul class="list-group" id="needHistoryList">
-                    <li class="list-group-item">
-                        <i class="bi bi-plus-circle text-primary"></i>
-                        تم تسجيل الاحتياج
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-@endsection
-@push('styles')
 <style>
-@media (max-width: 480px) {
-    .main-content {
-        padding: 8px;
-    }
-
-    .table {
-        font-size: 13px;
-    }
-
-    .btn {
-        font-size: 12px;
-    }
+.activity-heading {
+    background: linear-gradient(125deg, #17243a, #233c59 65%, #176c70);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
 }
 
+.activity-card {
+    border: 1px solid #e5eaf1;
+    border-radius: 12px;
+    background: white;
+}
+
+.activity-icon {
+    font-size: 25px;
+    color: #159a91;
+}
 </style>
-@endpush
+
+<div>
+
+    <div class="activity-heading">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="fw-bold">سجل الأنشطة</h4>
+                <p class="mb-0">متابعة العمليات والتغييرات المسجلة في المركز.</p>
+            </div>
+
+            <i class="bi bi-clock-history fs-1"></i>
+        </div>
+    </div>
 
 
+    <div class="row g-3 mb-4">
 
+        <div class="col-12 col-sm-6 col-xl-4">
+            <div class="activity-card p-3 d-flex align-items-center gap-3">
+                <i class="bi bi-calendar-check activity-icon"></i>
+                <div>
+                    <p class="text-secondary mb-1">أحدث فترة نشاط</p>
+                    <h4 class="fw-bold mb-0">اليوم</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-4">
+            <div class="activity-card p-3 d-flex align-items-center gap-3">
+                <i class="bi bi-arrow-left-right activity-icon"></i>
+                <div>
+                    <p class="text-secondary mb-1">إجمالي العمليات</p>
+                    <h4 class="fw-bold mb-0">28</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-4">
+            <div class="activity-card p-3 d-flex align-items-center gap-3">
+                <i class="bi bi-people activity-icon"></i>
+                <div>
+                    <p class="text-secondary mb-1">إجمالي المستخدمين</p>
+                    <h4 class="fw-bold mb-0">11</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="activity-card p-3 p-md-4">
+
+        <h5 class="fw-bold mb-2">قائمة الأنشطة</h5>
+        <p class="text-secondary small">ابحث عن نشاط أو حدّد نوعه وتاريخه.</p>
+
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-12 col-md-6">
+                <input type="text" id="activitySearch" class="form-control" placeholder="ابحث باسم النشاط أو المستخدم">
+            </div>
+
+            <div class="col-12 col-md-3">
+                <select id="activityType" class="form-select">
+                    <option value="">كل الأنشطة</option>
+                    <option value="إضافة أسرة">إضافة أسرة</option>
+                    <option value="إضافة فرد">إضافة فرد</option>
+                    <option value="إضافة احتياج">إضافة احتياج</option>
+                    <option value="تعديل بيانات">تعديل بيانات</option>
+                    <option value="تغيير حالة احتياج">تغيير حالة احتياج</option>
+                    <option value="حذف احتياج">حذف احتياج</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <input type="date" id="activityDate" class="form-control">
+            </div>
+
+        </div>
+
+
+        <div class="table-responsive">
+            <table class="table table-hover text-center align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>النشاط</th>
+                        <th>المستخدم</th>
+                        <th>التاريخ</th>
+                        <th>التفاصيل</th>
+                    </tr>
+                </thead>
+
+                <tbody id="activityTable">
+
+                    <tr data-type="إضافة أسرة" data-date="2026-11-16">
+                        <td>إضافة أسرة</td>
+                        <td>أحمد</td>
+                        <td>2026-11-16</td>
+                        <td>تم تسجيل أسرة جديدة</td>
+                    </tr>
+
+                    <tr data-type="إضافة فرد" data-date="2026-11-15">
+                        <td>إضافة فرد</td>
+                        <td>محمد</td>
+                        <td>2026-11-15</td>
+                        <td>تم تسجيل فرد جديد</td>
+                    </tr>
+
+                    <tr data-type="إضافة احتياج" data-date="2026-11-14">
+                        <td>إضافة احتياج</td>
+                        <td>خالد</td>
+                        <td>2026-11-14</td>
+                        <td>تم تسجيل احتياج جديد</td>
+                    </tr>
+
+                    <tr data-type="تعديل بيانات" data-date="2026-11-13">
+                        <td>تعديل بيانات</td>
+                        <td>أحمد</td>
+                        <td>2026-11-13</td>
+                        <td>تم تحديث بيانات أسرة</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <p id="noActivities" class="text-center text-secondary d-none">
+            لا توجد أنشطة مطابقة للبحث.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+const search = document.getElementById('activitySearch');
+const type = document.getElementById('activityType');
+const date = document.getElementById('activityDate');
+const rows = document.querySelectorAll('#activityTable tr');
+const noActivities = document.getElementById('noActivities');
+
+function filterActivities() {
+    let count = 0;
+
+    rows.forEach(function(row) {
+        let text = row.innerText.toLowerCase();
+        let matchesSearch = text.includes(search.value.toLowerCase());
+        let matchesType = !type.value || row.dataset.type === type.value;
+        let matchesDate = !date.value || row.dataset.date === date.value;
+
+        if (matchesSearch && matchesType && matchesDate) {
+            row.style.display = '';
+            count++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+
+    noActivities.classList.toggle('d-none', count > 0);
+}
+
+search.addEventListener('input', filterActivities);
+type.addEventListener('change', filterActivities);
+date.addEventListener('change', filterActivities);
+</script>
+
+@endsection

@@ -21,10 +21,7 @@
 <div class="panel">
     <h5>قائمة الأسر</h5>
 
-    <input type="text"
-        id="familySearch"
-        class="form-control mb-3"
-        placeholder="ابحث عن أسرة...">
+    <input type="text" id="familySearch" class="form-control mb-3" placeholder="ابحث عن أسرة...">
     <div class="table-responsive">
         <table class="table table-hover" id="familiesTable">
             <thead>
@@ -45,32 +42,27 @@
                 </tr>
 
                 @foreach ($families as $family)
-                    <tr>
-                        <td>{{ $family['id'] }}</td>
-                        <td>{{ $family['name'] }}</td>
-                        <td>{{ $family['members_count'] }}</td>
-                        <td>{{ $family['status'] }}</td>
-                        <td>
-                            <button type="button"
-                                class="details-btn"
-                                data-family-id="{{ $family['id'] }}"
-                                data-family-name="{{ $family['name'] }}"
-                                data-family-count="{{ $family['members_count'] }}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#familyDetails">
-                                <i class="bi bi-eye"></i>
-                                عرض التفاصيل
-                            </button>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $family['id'] }}</td>
+                    <td>{{ $family['name'] }}</td>
+                    <td>{{ $family['members_count'] }}</td>
+                    <td>{{ $family['status'] }}</td>
+                    <td>
+                        <button type="button" class="details-btn" data-family-id="{{ $family['id'] }}"
+                            data-family-name="{{ $family['name'] }}" data-family-count="{{ $family['members_count'] }}"
+                            data-bs-toggle="modal" data-bs-target="#familyDetails">
+                            <i class="bi bi-eye"></i>
+                            عرض التفاصيل
+                        </button>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="modal fade" id="familyDetails" tabindex="-1"
-    aria-labelledby="familyDetailsLabel" aria-hidden="true">
+<div class="modal fade" id="familyDetails" tabindex="-1" aria-labelledby="familyDetailsLabel" aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">
@@ -80,9 +72,7 @@
                     تفاصيل الأسرة
                 </h5>
 
-                <button type="button" class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="إغلاق"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
             </div>
 
             <div class="modal-body">
@@ -94,8 +84,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    data-bs-dismiss="modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     إغلاق
                 </button>
             </div>
@@ -104,8 +93,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="addFamilyModal" tabindex="-1"
-    aria-labelledby="addFamilyModalLabel" aria-hidden="true">
+<div class="modal fade" id="addFamilyModal" tabindex="-1" aria-labelledby="addFamilyModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
         <form class="modal-content" method="POST" action="{{ url('/families') }}">
@@ -116,9 +104,7 @@
                     تسجيل أسرة جديدة
                 </h5>
 
-                <button type="button" class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="إغلاق"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
             </div>
 
             <div class="modal-body">
@@ -152,75 +138,75 @@
 @endsection
 @push('styles')
 <style>
-    .details-btn,
-    .add-btn {
-        background-color: #159a91;
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.details-btn,
+.add-btn {
+    background-color: #159a91;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    .details-btn:hover,
-    .add-btn:hover {
-        background-color: #117c75;
-    }
+.details-btn:hover,
+.add-btn:hover {
+    background-color: #117c75;
+}
 
-    .details-btn i,
-    .add-btn i {
-        margin-left: 5px;
-    }
+.details-btn i,
+.add-btn i {
+    margin-left: 5px;
+}
 </style>
 @endpush
 @push('scripts')
 
 <script>
-    const searchInput = document.getElementById('familySearch');
-    const table = document.getElementById('familiesTable');
-    const noResults = document.getElementById('noResults');
+const searchInput = document.getElementById('familySearch');
+const table = document.getElementById('familiesTable');
+const noResults = document.getElementById('noResults');
 
-    searchInput.addEventListener('input', function() {
-        const searchText = this.value.trim().toLowerCase();
-        const rows = table.querySelectorAll('tbody tr:not(#noResults)');
-        let found = 0;
+searchInput.addEventListener('input', function() {
+    const searchText = this.value.trim().toLowerCase();
+    const rows = table.querySelectorAll('tbody tr:not(#noResults)');
+    let found = 0;
 
-        rows.forEach(function(row) {
-            const rowText = row.textContent.toLowerCase();
+    rows.forEach(function(row) {
+        const rowText = row.textContent.toLowerCase();
 
-            if (rowText.includes(searchText)) {
-                row.style.display = '';
-                found++;
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        if (found === 0) {
-            noResults.style.display = '';
+        if (rowText.includes(searchText)) {
+            row.style.display = '';
+            found++;
         } else {
-            noResults.style.display = 'none';
+            row.style.display = 'none';
         }
     });
+
+    if (found === 0) {
+        noResults.style.display = '';
+    } else {
+        noResults.style.display = 'none';
+    }
+});
 </script>
 
 @endpush
 @push('scripts')
 <script>
-    const familyDetailsModal = document.getElementById('familyDetails');
+const familyDetailsModal = document.getElementById('familyDetails');
 
-    familyDetailsModal.addEventListener('show.bs.modal', function(event) {
-        const button = event.relatedTarget;
+familyDetailsModal.addEventListener('show.bs.modal', function(event) {
+    const button = event.relatedTarget;
 
-        const familyId = button.getAttribute('data-family-id');
-        const familyName = button.getAttribute('data-family-name');
-        const familyCount = button.getAttribute('data-family-count');
+    const familyId = button.getAttribute('data-family-id');
+    const familyName = button.getAttribute('data-family-name');
+    const familyCount = button.getAttribute('data-family-count');
 
-        document.getElementById('detailFamilyId').textContent = familyId;
-        document.getElementById('detailFamilyName').textContent = familyName;
-        document.getElementById('detailFamilyCount').textContent = familyCount;
-    });
+    document.getElementById('detailFamilyId').textContent = familyId;
+    document.getElementById('detailFamilyName').textContent = familyName;
+    document.getElementById('detailFamilyCount').textContent = familyCount;
+});
 </script>
 @endpush

@@ -19,10 +19,7 @@
 
 <div class="panel">
     <h5>قائمة الأفراد</h5>
-     <input type="text"
-        id="indiviualsSearch"
-        class="form-control mb-3"
-        placeholder="ابحث عن فرد...">
+    <input type="text" id="indiviualsSearch" class="form-control mb-3" placeholder="ابحث عن فرد...">
     <div class="table-responsive">
         <table class="table table-hover" id="indiviualsTable">
             <thead>
@@ -44,46 +41,37 @@
                 </tr>
 
                 @foreach ($individuals as $person)
-                    <tr>
-                        <td>{{ $person['id'] }}</td>
-                        <td>{{ $person['name'] }}</td>
-                        <td>{{ $person['family'] }}</td>
-                        <td>{{ $person['age'] }}</td>
-                        <td>{{ $person['gender'] }}</td>
-                        <td>
-                            <button type="button"
-                                class="details-btn"
-                                data-indiviuals-id="{{ $person['id'] }}"
-                                data-indiviuals-name="{{ $person['name'] }}"
-                                data-indiviuals-age="{{ $person['age'] }}"
-                                data-indiviuals-gender="{{ $person['gender'] }}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#indiviualsDetails">
-                                <i class="bi bi-eye"></i>
-                                عرض التفاصيل
-                            </button>
-                            <button type="button"
-                                class="edit-btn"
-                                data-edit-id="{{ $person['id'] }}"
-                                data-edit-name="{{ $person['name'] }}"
-                                data-edit-family="{{ $person['family'] }}"
-                                data-edit-age="{{ $person['age'] }}"
-                                data-edit-gender="{{ $person['gender'] }}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#editIndividualModal">
-                                <i class="bi bi-pencil"></i>
-                                تعديل
-                            </button>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $person['id'] }}</td>
+                    <td>{{ $person['name'] }}</td>
+                    <td>{{ $person['family'] }}</td>
+                    <td>{{ $person['age'] }}</td>
+                    <td>{{ $person['gender'] }}</td>
+                    <td>
+                        <button type="button" class="details-btn" data-indiviuals-id="{{ $person['id'] }}"
+                            data-indiviuals-name="{{ $person['name'] }}" data-indiviuals-age="{{ $person['age'] }}"
+                            data-indiviuals-gender="{{ $person['gender'] }}" data-bs-toggle="modal"
+                            data-bs-target="#indiviualsDetails">
+                            <i class="bi bi-eye"></i>
+                            عرض التفاصيل
+                        </button>
+                        <button type="button" class="edit-btn" data-edit-id="{{ $person['id'] }}"
+                            data-edit-name="{{ $person['name'] }}" data-edit-family="{{ $person['family'] }}"
+                            data-edit-age="{{ $person['age'] }}" data-edit-gender="{{ $person['gender'] }}"
+                            data-bs-toggle="modal" data-bs-target="#editIndividualModal">
+                            <i class="bi bi-pencil"></i>
+                            تعديل
+                        </button>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="modal fade" id="indiviualsDetails" tabindex="-1"
-    aria-labelledby="indiviualsDetailsLabel" aria-hidden="true">
+<div class="modal fade" id="indiviualsDetails" tabindex="-1" aria-labelledby="indiviualsDetailsLabel"
+    aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,9 +81,7 @@
                     تفاصيل الفرد
                 </h5>
 
-                <button type="button" class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="إغلاق"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
             </div>
 
             <div class="modal-body">
@@ -110,8 +96,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    data-bs-dismiss="modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     إغلاق
                 </button>
             </div>
@@ -140,7 +125,7 @@
                     <label class="form-label">الأسرة التابعة</label>
                     <select name="family" class="form-select" required>
                         @foreach ($families as $familyName)
-                            <option value="{{ $familyName }}">{{ $familyName }}</option>
+                        <option value="{{ $familyName }}">{{ $familyName }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -189,7 +174,7 @@
                     <label class="form-label">الأسرة التابعة</label>
                     <select name="family" id="editFamily" class="form-select" required>
                         @foreach ($families as $familyName)
-                            <option value="{{ $familyName }}">{{ $familyName }}</option>
+                        <option value="{{ $familyName }}">{{ $familyName }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -220,105 +205,139 @@
 @endsection
 @push('styles')
 <style>
-    .details-btn,
-    .edit-btn,
-    .add-btn {
-        background-color: #159a91;
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.details-btn,
+.edit-btn,
+.add-btn {
+    background-color: #159a91;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    .edit-btn {
-        background-color: #3974d8;
-        margin-right: 4px;
-    }
+.edit-btn {
+    background-color: #3974d8;
+    margin-right: 4px;
+}
 
-    .details-btn:hover,
-    .add-btn:hover {
-        background-color: #117c75;
-    }
+.details-btn:hover,
+.add-btn:hover {
+    background-color: #117c75;
+}
 
-    .edit-btn:hover {
-        background-color: #2a5bb0;
-    }
+.edit-btn:hover {
+    background-color: #2a5bb0;
+}
 
-    .details-btn i,
-    .edit-btn i,
-    .add-btn i {
-        margin-left: 5px;
-    }
+.details-btn i,
+.edit-btn i,
+.add-btn i {
+    margin-left: 5px;
+}
+
+
+.needs-page .page-heading {
+    background: #17243a;
+    color: #ffffff;
+    padding: 24px;
+    border-radius: 14px;
+    margin-bottom: 24px;
+}
+
+.needs-page .page-heading .needs-title {
+    color: #ffffff;
+}
+
+.needs-page .page-heading .needs-subtitle {
+    color: #cbd5e1;
+}
+
+.needs-page .page-heading .needs-eyebrow {
+    background: rgba(255, 255, 255, 0.12);
+    color: #8de0d5;
+}
+
+.needs-page .page-heading .add-btn {
+    background: #159a91;
+    border-color: #159a91;
+    color: #ffffff;
+}
+
+.needs-page .page-heading .add-btn:hover {
+    background: #117c75;
+    border-color: #117c75;
+}
 </style>
 @endpush
 @push('scripts')
 
 <script>
-    const searchInput = document.getElementById('indiviualsSearch');
-    const table = document.getElementById('indiviualsTable');
-    const noResults = document.getElementById('noResults');
+const searchInput = document.getElementById('indiviualsSearch');
+const table = document.getElementById('indiviualsTable');
+const noResults = document.getElementById('noResults');
 
-    searchInput.addEventListener('input', function() {
-        const searchText = this.value.trim().toLowerCase();
-        const rows = table.querySelectorAll('tbody tr:not(#noResults)');
-        let found = 0;
+searchInput.addEventListener('input', function() {
+    const searchText = this.value.trim().toLowerCase();
+    const rows = table.querySelectorAll('tbody tr:not(#noResults)');
+    let found = 0;
 
-        rows.forEach(function(row) {
-            const rowText = row.textContent.toLowerCase();
+    rows.forEach(function(row) {
+        const rowText = row.textContent.toLowerCase();
 
-            if (rowText.includes(searchText)) {
-                row.style.display = '';
-                found++;
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        if (found === 0) {
-            noResults.style.display = '';
+        if (rowText.includes(searchText)) {
+            row.style.display = '';
+            found++;
         } else {
-            noResults.style.display = 'none';
+            row.style.display = 'none';
         }
     });
+
+    if (found === 0) {
+        noResults.style.display = '';
+    } else {
+        noResults.style.display = 'none';
+    }
+});
 </script>
 
 @endpush
 @push('scripts')
 <script>
-    const indiviualsModal = document.getElementById('indiviualsDetails');
+const indiviualsModal = document.getElementById('indiviualsDetails');
 
-    indiviualsModal.addEventListener('show.bs.modal', function(event) {
-        const button = event.relatedTarget;
+indiviualsModal.addEventListener('show.bs.modal', function(event) {
+    const button = event.relatedTarget;
 
-        const indiviualsId = button.getAttribute('data-indiviuals-id');
-        const indiviualsName = button.getAttribute('data-indiviuals-name');
-        const indiviualsAge = button.getAttribute('data-indiviuals-age');
-        const indiviualsGender = button.getAttribute('data-indiviuals-gender');
+    const indiviualsId = button.getAttribute('data-indiviuals-id');
+    const indiviualsName = button.getAttribute('data-indiviuals-name');
+    const indiviualsAge = button.getAttribute('data-indiviuals-age');
+    const indiviualsGender = button.getAttribute('data-indiviuals-gender');
 
 
-        document.getElementById('detailindiviualsId').textContent = indiviualsId;
-        document.getElementById('detailindiviualsName').textContent = indiviualsName;
-        document.getElementById('detailindiviualsAge').textContent = indiviualsAge;
-        document.getElementById('detailindiviualsGender').textContent = indiviualsGender;
+    document.getElementById('detailindiviualsId').textContent = indiviualsId;
+    document.getElementById('detailindiviualsName').textContent = indiviualsName;
+    document.getElementById('detailindiviualsAge').textContent = indiviualsAge;
+    document.getElementById('detailindiviualsGender').textContent = indiviualsGender;
 
-    });
+});
 </script>
 @endpush
 @push('scripts')
 <script>
-    const editModal = document.getElementById('editIndividualModal');
+const editModal = document.getElementById('editIndividualModal');
 
-    editModal.addEventListener('show.bs.modal', function(event) {
-        const button = event.relatedTarget;
+editModal.addEventListener('show.bs.modal', function(event) {
+    const button = event.relatedTarget;
 
-        document.getElementById('editIndividualForm').action = '/individuals/' + button.getAttribute('data-edit-id');
-        document.getElementById('editName').value = button.getAttribute('data-edit-name');
-        document.getElementById('editFamily').value = button.getAttribute('data-edit-family');
-        document.getElementById('editAge').value = button.getAttribute('data-edit-age');
-        document.getElementById('editGender').value = button.getAttribute('data-edit-gender');
-    });
+    document.getElementById('editIndividualForm').action = '/individuals/' + button.getAttribute(
+        'data-edit-id');
+    document.getElementById('editName').value = button.getAttribute('data-edit-name');
+    document.getElementById('editFamily').value = button.getAttribute('data-edit-family');
+    document.getElementById('editAge').value = button.getAttribute('data-edit-age');
+    document.getElementById('editGender').value = button.getAttribute('data-edit-gender');
+});
 </script>
 @endpush

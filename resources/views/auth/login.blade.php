@@ -8,8 +8,8 @@
     <span class="brand-icon">
         <i class="bi bi-houses-fill"></i>
     </span>
-    <h5>إدارة مراكز الإيواء</h5>
-    <p>سجّل الدخول للوصول إلى لوحة التحكم</p>
+    <h5>شيلتير </h5>
+    <p>سجّل الدخول للوصول إلى حسابك</p>
 </div>
 
 <form method="POST" action="{{ url('/login') }}">
@@ -33,7 +33,7 @@
     <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
 
     <p class="text-secondary small text-center mt-3 mb-0">
-        هذه واجهة تجريبية فقط حتى يتم ربطها بنظام تسجيل الدخول الفعلي.
+        شيلتر ، كل أسرة مهمة، وكل احتياج يستحق الاهتمام
     </p>
 </form>
 
