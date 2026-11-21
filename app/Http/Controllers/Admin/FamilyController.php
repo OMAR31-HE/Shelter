@@ -19,7 +19,7 @@ class FamilyController extends Controller
 
     public function store()
     {
-        // لا يوجد ربط بقاعدة بيانات بعد — الواجهة فقط، جاهزة للربط بـ API لاحقًا.
+        
         return redirect('/families');
     }
 }

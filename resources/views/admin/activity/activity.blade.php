@@ -5,26 +5,7 @@
 
 @section('content')
 
-<style>
-.activity-heading {
-    background: linear-gradient(125deg, #17243a, #233c59 65%, #176c70);
-    color: white;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
 
-.activity-card {
-    border: 1px solid #e5eaf1;
-    border-radius: 12px;
-    background: white;
-}
-
-.activity-icon {
-    font-size: 25px;
-    color: #159a91;
-}
-</style>
 
 <div>
 
@@ -160,35 +141,35 @@
 
 
 <script>
-const search = document.getElementById('activitySearch');
-const type = document.getElementById('activityType');
-const date = document.getElementById('activityDate');
-const rows = document.querySelectorAll('#activityTable tr');
-const noActivities = document.getElementById('noActivities');
+    const search = document.getElementById('activitySearch');
+    const type = document.getElementById('activityType');
+    const date = document.getElementById('activityDate');
+    const rows = document.querySelectorAll('#activityTable tr');
+    const noActivities = document.getElementById('noActivities');
 
-function filterActivities() {
-    let count = 0;
+    function filterActivities() {
+        let count = 0;
 
-    rows.forEach(function(row) {
-        let text = row.innerText.toLowerCase();
-        let matchesSearch = text.includes(search.value.toLowerCase());
-        let matchesType = !type.value || row.dataset.type === type.value;
-        let matchesDate = !date.value || row.dataset.date === date.value;
+        rows.forEach(function(row) {
+            let text = row.innerText.toLowerCase();
+            let matchesSearch = text.includes(search.value.toLowerCase());
+            let matchesType = !type.value || row.dataset.type === type.value;
+            let matchesDate = !date.value || row.dataset.date === date.value;
 
-        if (matchesSearch && matchesType && matchesDate) {
-            row.style.display = '';
-            count++;
-        } else {
-            row.style.display = 'none';
-        }
-    });
+            if (matchesSearch && matchesType && matchesDate) {
+                row.style.display = '';
+                count++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
 
-    noActivities.classList.toggle('d-none', count > 0);
-}
+        noActivities.classList.toggle('d-none', count > 0);
+    }
 
-search.addEventListener('input', filterActivities);
-type.addEventListener('change', filterActivities);
-date.addEventListener('change', filterActivities);
+    search.addEventListener('input', filterActivities);
+    type.addEventListener('change', filterActivities);
+    date.addEventListener('change', filterActivities);
 </script>
 
 @endsection

@@ -203,7 +203,7 @@
 </div>
 
 @endsection
-@push('styles')
+<!-- @push('styles')
 <style>
 .details-btn,
 .edit-btn,
@@ -271,73 +271,73 @@
     border-color: #117c75;
 }
 </style>
-@endpush
+@endpush -->
 @push('scripts')
 
 <script>
-const searchInput = document.getElementById('indiviualsSearch');
-const table = document.getElementById('indiviualsTable');
-const noResults = document.getElementById('noResults');
+    const searchInput = document.getElementById('indiviualsSearch');
+    const table = document.getElementById('indiviualsTable');
+    const noResults = document.getElementById('noResults');
 
-searchInput.addEventListener('input', function() {
-    const searchText = this.value.trim().toLowerCase();
-    const rows = table.querySelectorAll('tbody tr:not(#noResults)');
-    let found = 0;
+    searchInput.addEventListener('input', function() {
+        const searchText = this.value.trim().toLowerCase();
+        const rows = table.querySelectorAll('tbody tr:not(#noResults)');
+        let found = 0;
 
-    rows.forEach(function(row) {
-        const rowText = row.textContent.toLowerCase();
+        rows.forEach(function(row) {
+            const rowText = row.textContent.toLowerCase();
 
-        if (rowText.includes(searchText)) {
-            row.style.display = '';
-            found++;
+            if (rowText.includes(searchText)) {
+                row.style.display = '';
+                found++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        if (found === 0) {
+            noResults.style.display = '';
         } else {
-            row.style.display = 'none';
+            noResults.style.display = 'none';
         }
     });
-
-    if (found === 0) {
-        noResults.style.display = '';
-    } else {
-        noResults.style.display = 'none';
-    }
-});
 </script>
 
 @endpush
 @push('scripts')
 <script>
-const indiviualsModal = document.getElementById('indiviualsDetails');
+    const indiviualsModal = document.getElementById('indiviualsDetails');
 
-indiviualsModal.addEventListener('show.bs.modal', function(event) {
-    const button = event.relatedTarget;
+    indiviualsModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
 
-    const indiviualsId = button.getAttribute('data-indiviuals-id');
-    const indiviualsName = button.getAttribute('data-indiviuals-name');
-    const indiviualsAge = button.getAttribute('data-indiviuals-age');
-    const indiviualsGender = button.getAttribute('data-indiviuals-gender');
+        const indiviualsId = button.getAttribute('data-indiviuals-id');
+        const indiviualsName = button.getAttribute('data-indiviuals-name');
+        const indiviualsAge = button.getAttribute('data-indiviuals-age');
+        const indiviualsGender = button.getAttribute('data-indiviuals-gender');
 
 
-    document.getElementById('detailindiviualsId').textContent = indiviualsId;
-    document.getElementById('detailindiviualsName').textContent = indiviualsName;
-    document.getElementById('detailindiviualsAge').textContent = indiviualsAge;
-    document.getElementById('detailindiviualsGender').textContent = indiviualsGender;
+        document.getElementById('detailindiviualsId').textContent = indiviualsId;
+        document.getElementById('detailindiviualsName').textContent = indiviualsName;
+        document.getElementById('detailindiviualsAge').textContent = indiviualsAge;
+        document.getElementById('detailindiviualsGender').textContent = indiviualsGender;
 
-});
+    });
 </script>
 @endpush
 @push('scripts')
 <script>
-const editModal = document.getElementById('editIndividualModal');
+    const editModal = document.getElementById('editIndividualModal');
 
-editModal.addEventListener('show.bs.modal', function(event) {
-    const button = event.relatedTarget;
+    editModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
 
-    document.getElementById('editIndividualForm').action = '/individuals/' + button.getAttribute(
-        'data-edit-id');
-    document.getElementById('editName').value = button.getAttribute('data-edit-name');
-    document.getElementById('editFamily').value = button.getAttribute('data-edit-family');
-    document.getElementById('editAge').value = button.getAttribute('data-edit-age');
-    document.getElementById('editGender').value = button.getAttribute('data-edit-gender');
-});
+        document.getElementById('editIndividualForm').action = '/individuals/' + button.getAttribute(
+            'data-edit-id');
+        document.getElementById('editName').value = button.getAttribute('data-edit-name');
+        document.getElementById('editFamily').value = button.getAttribute('data-edit-family');
+        document.getElementById('editAge').value = button.getAttribute('data-edit-age');
+        document.getElementById('editGender').value = button.getAttribute('data-edit-gender');
+    });
 </script>
 @endpush

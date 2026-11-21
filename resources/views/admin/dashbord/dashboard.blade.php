@@ -5,82 +5,6 @@
 
 @section('content')
 
-<style>
-.dashboard-heading {
-    background: linear-gradient(125deg, #17243a 0%, #233c59 65%, #176c70 100%);
-    color: white;
-    padding: 25px;
-    border-radius: 16px;
-    margin-bottom: 24px;
-}
-
-.dashboard-heading p {
-    color: #c3d1df;
-    margin-bottom: 0;
-}
-
-.stat-card,
-.dashboard-panel {
-    background: white;
-    padding: 20px;
-    border: 1px solid #e5eaf1;
-    border-radius: 12px;
-    height: 100%;
-}
-
-.stat-icon {
-    font-size: 25px;
-    margin-bottom: 12px;
-}
-
-.stat-card p {
-    color: #7b8798;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.stat-card h3 {
-    font-weight: bold;
-    margin: 0;
-    color: #17243a;
-}
-
-.dashboard-panel h5 {
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 18px;
-}
-
-.dashboard-item {
-    padding: 12px 0;
-    border-bottom: 1px solid #edf0f5;
-}
-
-.dashboard-item:last-child {
-    border-bottom: 0;
-}
-
-.quick-link {
-    display: block;
-    padding: 14px;
-    border: 1px solid #e5eaf1;
-    border-radius: 10px;
-    color: #253247;
-    text-decoration: none;
-}
-
-.quick-link:hover {
-    background: #f4f9f9;
-    border-color: #159a91;
-}
-
-@media (max-width: 576px) {
-    .dashboard-heading {
-        padding: 20px;
-    }
-}
-</style>
-
 
 <div class="dashboard-heading">
     <h4 class="fw-bold">مرحبًا بك في الإيواء 👋</h4>
@@ -285,12 +209,12 @@
 </div>
 
 <script>
-document.getElementById('dashboardDate').textContent =
-    new Intl.DateTimeFormat('ar', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    }).format(new Date());
+    document.getElementById('dashboardDate').textContent =
+        new Intl.DateTimeFormat('ar', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).format(new Date());
 </script>
 
 @endsection

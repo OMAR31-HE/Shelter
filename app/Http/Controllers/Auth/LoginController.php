@@ -13,7 +13,7 @@ class LoginController extends Controller
 
     public function login()
     {
-        // لا يوجد تحقق فعلي بعد — الواجهة فقط، جاهزة للربط بـ API تسجيل الدخول لاحقًا.
+        
         return redirect('/dashboard');
     }
 

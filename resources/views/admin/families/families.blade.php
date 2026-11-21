@@ -136,77 +136,53 @@
 </div>
 
 @endsection
-@push('styles')
-<style>
-.details-btn,
-.add-btn {
-    background-color: #159a91;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.3s;
-}
 
-.details-btn:hover,
-.add-btn:hover {
-    background-color: #117c75;
-}
-
-.details-btn i,
-.add-btn i {
-    margin-left: 5px;
-}
-</style>
-@endpush
 @push('scripts')
 
 <script>
-const searchInput = document.getElementById('familySearch');
-const table = document.getElementById('familiesTable');
-const noResults = document.getElementById('noResults');
+    const searchInput = document.getElementById('familySearch');
+    const table = document.getElementById('familiesTable');
+    const noResults = document.getElementById('noResults');
 
-searchInput.addEventListener('input', function() {
-    const searchText = this.value.trim().toLowerCase();
-    const rows = table.querySelectorAll('tbody tr:not(#noResults)');
-    let found = 0;
+    searchInput.addEventListener('input', function() {
+        const searchText = this.value.trim().toLowerCase();
+        const rows = table.querySelectorAll('tbody tr:not(#noResults)');
+        let found = 0;
 
-    rows.forEach(function(row) {
-        const rowText = row.textContent.toLowerCase();
+        rows.forEach(function(row) {
+            const rowText = row.textContent.toLowerCase();
 
-        if (rowText.includes(searchText)) {
-            row.style.display = '';
-            found++;
+            if (rowText.includes(searchText)) {
+                row.style.display = '';
+                found++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        if (found === 0) {
+            noResults.style.display = '';
         } else {
-            row.style.display = 'none';
+            noResults.style.display = 'none';
         }
     });
-
-    if (found === 0) {
-        noResults.style.display = '';
-    } else {
-        noResults.style.display = 'none';
-    }
-});
 </script>
 
 @endpush
 @push('scripts')
 <script>
-const familyDetailsModal = document.getElementById('familyDetails');
+    const familyDetailsModal = document.getElementById('familyDetails');
 
-familyDetailsModal.addEventListener('show.bs.modal', function(event) {
-    const button = event.relatedTarget;
+    familyDetailsModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
 
-    const familyId = button.getAttribute('data-family-id');
-    const familyName = button.getAttribute('data-family-name');
-    const familyCount = button.getAttribute('data-family-count');
+        const familyId = button.getAttribute('data-family-id');
+        const familyName = button.getAttribute('data-family-name');
+        const familyCount = button.getAttribute('data-family-count');
 
-    document.getElementById('detailFamilyId').textContent = familyId;
-    document.getElementById('detailFamilyName').textContent = familyName;
-    document.getElementById('detailFamilyCount').textContent = familyCount;
-});
+        document.getElementById('detailFamilyId').textContent = familyId;
+        document.getElementById('detailFamilyName').textContent = familyName;
+        document.getElementById('detailFamilyCount').textContent = familyCount;
+    });
 </script>
 @endpush
